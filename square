@@ -1,0 +1,24 @@
+case class  Point(x: Int, y: Int)
+
+object Square {
+
+  def isSquare(points: Point*): Boolean = {
+
+    if (points.length != 4)
+      false
+
+    else {
+      val distances = Range(0, points.length-1)
+        .map( p=> getDistances(points.drop(p).toList))
+        .flatMap(_.toList)
+
+      distances.toSet.size == 2
+    }
+  }
+
+  def distanceSquare(pointA: Point, pointB: Point): Int =
+    (pointA.x - pointB.x) * (pointA.x - pointB.x) + (pointA.y - pointB.y) * (pointA.y - pointB.y)
+
+  def getDistances(points: List[Point]): List[Int] = points.drop(1).map(distanceSquare(points(0), _))
+
+}
