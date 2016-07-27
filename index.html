@@ -48,6 +48,25 @@ object Square {
 }
 </code></pre>
 
+<h3>
+<a id="取最小分页" class="anchor" href="#%E5%8F%96%E6%9C%80%E5%B0%8F%E5%88%86%E9%A1%B5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>取最小分页</h3>
+
+<pre><code>def minN(m: Int, n: Int): (Int, Int) = floop(n, m+n-1, m-1)
+
+def isMatch(size: Int, page:Int, total: Int, min: Int): Boolean = {
+  page * size &gt;= total &amp;&amp; (page-1) * size &lt;=  min
+}
+
+def floop(size: Int, total: Int, m: Int): (Int, Int) = {
+  val page = math.ceil(total.toFloat / size).toInt
+  if (isMatch(size, page, total, m)) {
+    (size, page)
+  }else{
+    floop(size+1, total, m)
+  }
+}
+</code></pre>
+
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/lhp609661060/lhpblog">Lhpblog</a> is maintained by <a href="https://github.com/lhp609661060">lhp609661060</a>.</span>
 
