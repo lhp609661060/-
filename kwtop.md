@@ -6,5 +6,5 @@
 
 ## 遇到的问题
 
-1. scala之前就有，不需要下载
-2. 想使用sbt构建项目 
+1. (mac) brew install scala 安装scala环境
+2. (mac) brew install sbt   安装sbt 包管理工具
