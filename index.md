@@ -42,3 +42,33 @@
     
 ### [kwtop.md](/kwtop.md)关键字排名
 
+### java 分词 jieba
+    if (ObjectUtils.isEmpty(kws))
+            return new ArrayList<>();
+
+        // 分词
+        String kwsNotNbsp = kws
+                .replaceAll("\\.", "")
+                .replaceAll(" ", "");
+        JiebaSegmenter jiebaSegmenter = new JiebaSegmenter();
+        List<String> kw = jiebaSegmenter.sentenceProcess(kwsNotNbsp);
+
+        List<String> siteKw = Arrays.asList("推广家", "爱喇叭");
+
+        List<String> result = kw.stream()
+                // 屏蔽单个字符，防止符合，单字影响搜索效果
+                .filter(s -> s.length() > 1)
+                // 屏蔽纯数字单字符
+                .filter(s -> !Pattern.matches("\\d+", s))
+                // 屏蔽一些站点关键字
+                .filter(s -> !siteKw.contains(s))
+                .collect(Collectors.toList());
+
+        // 防止误删关键字
+        String kws1 = kws
+                .replaceAll("&", " ")
+                .replaceAll(",", " ")
+                .replaceAll("-", " ");
+
+        result.add(kws1);
+
