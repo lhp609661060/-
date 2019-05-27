@@ -71,4 +71,18 @@
                 .replaceAll("-", " ");
 
         result.add(kws1);
+        
+### python 上下文管理器简写
+    import contextlib
+
+    @contextlib.contextmanager
+    def myopen(filename, mode):
+        f = open(filename, mode)
+        try:
+            yield f.readlines() # 此处是返回值
+        except Exception as e:
+            print e
+
+        finally:
+            f.close()
 
